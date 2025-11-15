@@ -16,8 +16,8 @@ class User {
 
         // failed_attempts, last_attempt, locked_until
         $sql = "INSERT INTO {$this->table} 
-                (username, email, password, failed_attempts, last_attempt, locked_until)
-                VALUES (?, ?, ?, 0, NULL, NULL)";
+                (username, email, password, role, failed_attempts, last_attempt, locked_until)
+                VALUES (?, ?, ?, 'jelata', 0, NULL, NULL)";
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("sss", $username, $email, $hashed);

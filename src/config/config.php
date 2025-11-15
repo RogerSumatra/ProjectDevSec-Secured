@@ -2,7 +2,7 @@
 $host = "db";
 $user = "twita";
 $pass = "twita_pass";
-$dbname = "twita_db";
+$dbname = "twita_db_secured";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 

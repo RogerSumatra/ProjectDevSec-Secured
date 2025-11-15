@@ -24,7 +24,7 @@ $user = $_SESSION['user'] ?? null;
         </div>
       </div>
     <?php else: ?>
-        <button onclick="location.href='views/auth/login.php'" class="login-btn">Login</button>
+        <button onclick="location.href='index.php?action=loginForm'" class="login-btn">Login</button>
       </a>
     <?php endif; ?>
   </header>

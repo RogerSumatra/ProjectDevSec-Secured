@@ -17,7 +17,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: twita_db
+      MYSQL_DATABASE: twita_db_secured
       MYSQL_USER: twita
       MYSQL_PASSWORD: twita_pass
     volumes:
