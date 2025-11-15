@@ -6,6 +6,14 @@ class SubscriptionController {
         $this->db = $db;
     }
 
+    public function showSubscription() {
+        if(!isset($_SESSION['user'])) {
+            header("Location: views/auth/login.php");
+            exit;
+        }
+        include __DIR__ . '/../views/subscription.php';
+    }
+
     private function validateCsrf($token) {
         return !empty($token) 
             && !empty($_SESSION['csrf_token']) 

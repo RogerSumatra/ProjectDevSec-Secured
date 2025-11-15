@@ -52,7 +52,7 @@ switch ($action) {
         $profile->updateUsername();
         break;
     case 'subscription':
-        include __DIR__ . '/views/subscription.php';
+        $subs->showSubscription();
         break;
     case 'subs':
         $subs->subscribe();

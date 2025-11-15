@@ -2,6 +2,8 @@
 <?php include __DIR__ . '/layout/sidebar.php'; ?>
 
 <main>
+  <?php $csrf = $_SESSION['csrf_token']; ?>
+
   <h2>Profile</h2>
 
   <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
@@ -77,6 +79,7 @@
               <form method="POST" action="index.php?action=deleteTweet" style="display:inline;" 
                     onsubmit="return confirm('Yakin ingin menghapus tweet ini?');">
                 <input type="hidden" name="id" value="<?= $tweet['id']; ?>">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
                 <button type="submit" title="Hapus Tweet"
                         style="background:none; border:none; color:#dc3545; font-size:18px; cursor:pointer;">
                   <i class="fas fa-trash"></i>

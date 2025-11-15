@@ -12,6 +12,12 @@ class TweetController {
         $this->uploadDir = __DIR__ . '/../uploads/';
     }
 
+    private function validateCsrf($token) {
+        return !empty($token) 
+            && !empty($_SESSION['csrf_token']) 
+            && hash_equals($_SESSION['csrf_token'], $token);
+    }
+
     public function index() {
         $query = $_GET['q'] ?? '';
 
@@ -50,6 +56,12 @@ class TweetController {
     }
 
     public function store() {
+        if (!$this->validateCsrf($_POST['csrf_token'] ?? '')) {
+            http_response_code(400);
+            echo "Invalid CSRF token";
+            exit;
+        }
+
         $user_id = $_SESSION['user']['id'] ?? 1;
         $content = $_POST['content'] ?? '';
 
@@ -104,6 +116,12 @@ class TweetController {
     }
 
     public function updateTweet() {
+        if (!$this->validateCsrf($_POST['csrf_token'] ?? '')) {
+            http_response_code(400);
+            echo "Invalid CSRF token";
+            exit;
+        }
+
         $id = $_POST['id'] ?? null;
         $content = $_POST['content'] ?? null;
         $oldImageUrl = $_POST['image_url'] ?? null;
@@ -176,6 +194,13 @@ class TweetController {
     }
 
     public function deleteTweet() {
+        
+        if (!$this->validateCsrf($_POST['csrf_token'] ?? '')) {
+            http_response_code(400);
+            echo "Invalid CSRF token";
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'] ?? null;
 

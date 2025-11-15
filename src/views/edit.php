@@ -14,6 +14,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'ningrat') {
 
 <main>
   <?php $currentRole = $_SESSION['user']['role'] ?? 'jelata'; ?>
+  <?php $csrf = $_SESSION['csrf_token']; ?>
+  
   <h2>Edit Tweet</h2>
 
   <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
@@ -21,6 +23,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'ningrat') {
   <div class="tweet-edit">
     <form method="POST" action="index.php?action=updateTweet" enctype="multipart/form-data">
       <input type="hidden" name="id" value="<?= $tweet['id']; ?>">
+      <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf) ?>">
       <textarea name="content" rows="4" style="width:100%;" 
         maxlength="<?= ($currentRole === 'ningrat') ? 1000 : 200; ?>" required><?= $tweet['content']; ?></textarea>
       <br><br>
